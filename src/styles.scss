@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+*,::after,::before{
+    margin: 0;
+    padding : 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+p,h1{
+    margin:0;
+    padding: 0;
+}
+.mat-simple-snackbar {
+    justify-content: center !important;
+    
+  }
+
+
+
+
+.gray-dark {
+    background-color: #363740;
+}
+
+.gray-light{
+    opacity: 70%!important;
+    color:white!important;
+}
+
+.gray-simple {
+    color:#9FA2B4!important;
+}

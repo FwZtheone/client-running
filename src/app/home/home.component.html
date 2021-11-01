@@ -1,0 +1,54 @@
+<div class="container-home">
+    <div class="container-picture">
+        
+    </div>
+    <div class="container-form">
+      <form class="form-container" [formGroup]="profileForm" (ngSubmit)="handleSubmit()">
+        <div class="card-login" >
+          <h1 class="title">Connexion </h1>
+            <div>
+                <mat-form-field appearance="legacy">
+                    <mat-label>Adresse mail</mat-label>
+                    <input matInput placeholder="écris ici.." formControlName="email">
+                    <mat-hint>ex : jojo@gmail.com</mat-hint>
+                    <mat-error *ngIf="this.email?.errors?.required; else emptyEmail">
+                      Le champ email est  <strong>requis</strong>
+                    </mat-error>
+                    <ng-template #emptyEmail>
+                      <mat-error >
+                        Veuillez entrer une adresse email <strong>valide</strong> ! 
+                      </mat-error>
+                    </ng-template>
+                  </mat-form-field>
+            </div>
+            
+    
+             <div>
+                <mat-form-field appearance="legacy">
+                    <mat-label>Entre ton mot de passe</mat-label>
+                    <input matInput placeholder="écris ici.." [type]="hide ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-hint>Le mot de passe doit faire au minimum 8 caractères</mat-hint>
+
+                    <mat-error *ngIf="this.password?.errors?.required; else lengthPassword">
+                      Le champ mot de passe est  <strong>requis</strong>
+                    </mat-error>
+        
+                    <ng-template #lengthPassword>
+                      <mat-error >
+                        Votre mot de passe azoit faire au minimum <strong>8 caractéres</strong>
+                      </mat-error>
+                    </ng-template>
+
+                  </mat-form-field>
+             </div>
+             <div class="container-form-btn">
+                <button mat-stroked-button color="primary">Connexion</button>
+                <mat-hint class="not-compte"><a [routerLink]="['/inscription']" >Pas encore de compte?</a></mat-hint>
+             </div>
+        </div>
+      </form>
+    </div>
+</div>

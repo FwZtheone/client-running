@@ -1,0 +1,50 @@
+<mat-sidenav-container class="sidenav-container cream">
+  <mat-sidenav #drawer class="sidenav gray-dark" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class="gray-light menu">Tableau de bord</mat-toolbar>
+    <mat-nav-list> 
+      <div class="container-nav">
+      <a mat-list-item  [routerLink]="['acceuil']"  class="gray-light  pointer" >
+        <mat-icon class="icon">house</mat-icon> 
+        <div>Acceuil</div>
+      
+      </a>
+      <a mat-list-item [routerLink]="['objectif']"   class="gray-light pointer"> <mat-icon class="icon">trending_up</mat-icon><div>Objectif</div></a>
+      <a mat-list-item [routerLink]="['agenda']"  class="gray-light pointer"><mat-icon class="icon">class</mat-icon><div>Agenda</div></a>
+      <a mat-list-item [routerLink]="['entrainement']" class="gray-light pointer"><mat-icon class="icon">feed</mat-icon><div>Entrainements</div></a>
+      <a mat-list-item [routerLink]="['montre']" class="gray-light pointer"><mat-icon class="icon">watch</mat-icon><div>Montre</div></a>
+    </div> 
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar  class="header-toolbar cream">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>Acceuil</span>
+      <span class="example-spacer"></span>
+     
+        <!-- icon here  -->
+        <mat-icon matRipple  class="image-icon"  [matMenuTriggerFor]="menu"  ></mat-icon>
+       
+        <mat-menu #menu="matMenu" >
+          <button mat-menu-item><mat-icon>settings</mat-icon>Paramétres</button>
+          <button mat-menu-item><mat-icon>logout</mat-icon>Déconnexion</button>
+        </mat-menu>
+      
+    </mat-toolbar>
+    
+    <app-dashboard></app-dashboard>
+
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

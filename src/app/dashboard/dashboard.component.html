@@ -1,0 +1,141 @@
+
+<div class="grid-container">
+<!-- 
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{card.title}}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>Card Content Here</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list> -->
+
+
+  <mat-grid-list cols="4" rowHeight="250px">
+    <mat-grid-tile >
+      <mat-card class="dashboard-card">
+        <div style="margin-bottom: 20%;">
+          <mat-card-title class="title-card">
+            Activitées réalisées
+          </mat-card-title>
+        </div>
+        <mat-card-content class="dashboard-card-content dashboard-card-center">
+          <div>
+              <span class="value-card">{{this.userService.getActivityTotal()}}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile >
+      <mat-card class="dashboard-card">
+        <div style="margin-bottom: 20%;"> 
+          <mat-card-title class="title-card">
+            Km parcouru
+          </mat-card-title>
+        </div>
+        <mat-card-content class="dashboard-card-content dashboard-card-center">
+          <div><span>{{this.userService.getKmTotal()}}</span></div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile >
+      <mat-card class="dashboard-card">
+        <div style="margin-bottom: 20%;">
+          <mat-card-title class="title-card">
+            Poids
+          </mat-card-title>
+        </div>
+        <mat-card-content class="dashboard-card-content dashboard-card-center">
+          <div><span>{{ this.userService.getPoids() }}KG</span></div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile >
+      <mat-card class="dashboard-card">
+        <div style="margin-bottom: 20%;">
+          <mat-card-title class="title-card">
+            Age
+          </mat-card-title>
+        </div>
+        <mat-card-content class="dashboard-card-content dashboard-card-center">
+          <div><span>{{this.userService.getAge()}}</span></div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+    <mat-grid-list cols="8" rowHeight="700" >
+      <mat-grid-tile colspan="5"  rowspan="1">
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title>
+              <h1>Dernière activitée</h1>
+              <h5>Le 17 Novembre à 17h00</h5> 
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content >
+            <app-perfomance ></app-perfomance>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile colspan="3"  rowspan="1">
+        <mat-card class="dashboard-card  no-padding">
+         
+          <mat-card-content  class="card-content-100">
+              <div class="container-card-information">
+                <div class=" card">
+                  <h1 class="gray-simple">Calories</h1>
+                  <p style="font-size: 1.3vw; padding-top: 10px;font-weight: bold;">449</p>
+                </div>
+  
+                <div  class="card-border  card">
+                  <h1 class="gray-simple">Distances</h1>
+                  <p style="font-size: 1.3vw;  padding-top: 10px;font-weight: bold; padding-top: 10px;font-weight: bold;">10 km</p>
+                </div>
+  
+                <div  class="card-border  card">
+                  <h1 class="gray-simple">Vitesse moyenne</h1>
+                  <p style="font-size: 1.3vw;  padding-top: 10px;font-weight: bold;"> 10</p>
+                </div>
+  
+                <div  class="card-border card">
+                  <h1 class="gray-simple">Vitesse max</h1>
+                  <p style="font-size: 1.3vw;  padding-top: 10px;font-weight: bold;">18 km/h</p>
+                </div>
+  
+            
+                <div  class="card-border card">
+                  <h1 class="gray-simple">Temps</h1>
+                  <p style="font-size: 1.3vw;  padding-top: 10px;font-weight: bold;">5m/km</p>
+                </div>
+              </div>
+
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+
+
+
+     
+
+     
+    </mat-grid-list>
+
+
+
+</div>
+
+
+

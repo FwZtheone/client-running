@@ -1,0 +1,90 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+
+.image-icon{
+  background-image: url('../../assets/men.jpg');
+  background-position: center;
+  background-size: cover;
+  width: 60px;
+  height:  60px;
+  clip-path: circle(50%);
+  cursor: pointer;
+}
+
+
+.header-toolbar{
+  height: 80px;
+}
+
+
+.container-image{
+  margin-right:2%;
+  
+}
+
+.cream{
+  background-color: #FAFAFA;
+}
+
+
+.menu{
+  display: flex;
+  justify-content: center;
+}
+
+
+.container-icon-a{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.divider{
+  background-color:#9FA2B4!important;
+  
+    margin-bottom: 4em;
+  
+}
+
+
+
+.container-nav{
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  justify-content: space-evenly;
+  
+  .icon{
+    padding-right:20%;
+  }
+}
+
+
+
+.pointer{
+  cursor: pointer;
+ 
+}
