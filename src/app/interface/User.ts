@@ -12,7 +12,7 @@ export interface User {
     activity_total:number;
     km_total:number;
     age:number;
-    
+    niveau: string;
   }
   
   

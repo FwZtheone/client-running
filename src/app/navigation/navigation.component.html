@@ -3,10 +3,10 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar class="gray-light menu">Tableau de bord</mat-toolbar>
+    <mat-toolbar class="gray-light menu" [routerLink]="['/user']" style="cursor: pointer;">Tableau de bord</mat-toolbar>
     <mat-nav-list> 
       <div class="container-nav">
-      <a mat-list-item  [routerLink]="['acceuil']"  class="gray-light  pointer" >
+      <a mat-list-item  [routerLink]="['/user']"  class="gray-light  pointer" >
         <mat-icon class="icon">house</mat-icon> 
         <div>Acceuil</div>
       
@@ -37,12 +37,12 @@
        
         <mat-menu #menu="matMenu" >
           <button mat-menu-item><mat-icon>settings</mat-icon>Paramétres</button>
-          <button mat-menu-item><mat-icon>logout</mat-icon>Déconnexion</button>
+          <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon>Déconnexion</button>
         </mat-menu>
       
     </mat-toolbar>
     
-    <app-dashboard></app-dashboard>
+      <router-outlet></router-outlet>
 
 
 

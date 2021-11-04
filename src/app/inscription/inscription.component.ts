@@ -17,6 +17,10 @@ interface Sexe {
   viewValue : string;
 }
 
+interface Niveau {
+  value: string,
+  viewValue: string
+}
 
 
 
@@ -35,7 +39,11 @@ export class InscriptionComponent implements OnInit {
 
 
   sexe : Sexe[] = [{value : false , viewValue : 'Homme',},{value : true , viewValue : 'Femme'}]
-
+  niveau: Niveau[] = [
+    {value:"debutant", viewValue : "Débutant"},
+    {value:"intermediaire", viewValue : "intermédiaire"},
+    {value:"expert", viewValue : "Expert"},
+]
   // pattern pour avoir un mot de passe avec 8 lettres, M, @
   //Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
   profileForm =  this.fb.group({
@@ -46,7 +54,9 @@ export class InscriptionComponent implements OnInit {
     email : ['',[Validators.minLength(1),Validators.required, Validators.email]],
     password : ['',[Validators.minLength(1),Validators.required,Validators.minLength(8)] ],
     sexe : ['',[Validators.required] ],
-    poids : ['',[Validators.required] ]
+    poids : ['',[Validators.required] ],
+    niveau : ['',[Validators.required] ],
+    age : ['',[Validators.required] ]
   })
   
 
@@ -90,13 +100,21 @@ export class InscriptionComponent implements OnInit {
     return this.profileForm.get('sexe');
   }
 
+
+  get age(){
+    return this.profileForm.get('age');
+  }
+
+  get getNiveau(){
+    return this.profileForm.get('niveau')
+  }
+
    handleSubmit(){
     if(this.profileForm.status === "INVALID"){
-      console.error('testing')
+      console.error('erreur')
       
     }
     else{
-      console.log(this.profileForm.value);
       this.userService.inscription(this.profileForm.value).subscribe((data)=>{
         console.log(data);
         if(!data.success){

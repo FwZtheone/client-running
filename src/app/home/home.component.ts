@@ -29,7 +29,11 @@ export class HomeComponent implements OnInit {
     private userService: UserService,
     private AuthService: AuthService,
     private tokenService: TokenService,
-    private router: Router) { }
+    private router: Router) {
+
+      
+      
+     }
 
   ngOnInit(): void {
   }
@@ -52,7 +56,7 @@ export class HomeComponent implements OnInit {
 
   handleSubmit(){
     if(this.profileForm.status === "INVALID"){
-      console.error('testing')
+      console.error('erreur')
     }
     else{
       this.AuthService.connexion(this.profileForm.value).subscribe((data)=>{
@@ -62,10 +66,11 @@ export class HomeComponent implements OnInit {
           this.openSnackBar("L'émail ou le mot de passe n'est pas bon")
         }
         else{
-          console.log(data.response)
           this.openSnackBar("Connexion réussie !")
-          this.tokenService.saveToken(JSON.stringify(data.response));
-          this.router.navigate(['dashboard'])
+          
+          this.tokenService.saveToken(data.response.toString());
+          this.userService.initializeToken();
+          this.router.navigate(['user'])
           
         }
       })

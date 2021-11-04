@@ -1,35 +1,33 @@
-.form-container{
-   
-    height: 100%;
+.form-container {
+  height: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  .container-card {
+    height: 650ox;
+    width: 800px;
+  }
+
+  .container-card-input {
     display: flex;
-    margin :0 auto;
-    justify-content: center;
-    align-items: center;
-    .container-card{
-        height: 500px;
-        width: 800px;
-    }
-
-    .container-card-input{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        flex-direction: column;
-    }
-}
-
-.button{
-    width: 100%;
-}
-
-
-.container-btn{
-    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  }
 }
 
-.already-compte{
-    margin-top: 10px;
+.button {
+  width: 100%;
+}
+
+.container-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.already-compte {
+  margin-top: 10px;
 }

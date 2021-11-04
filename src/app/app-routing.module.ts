@@ -1,3 +1,5 @@
+import { AgendaComponent } from './agenda/agenda.component';
+import { EntrainementComponent } from './entrainement/entrainement.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { UserGuard } from './user.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -14,8 +16,26 @@ const routes: Routes = [
     path:'inscription', component: InscriptionComponent
   },
   {
-    path: 'dashboard', component: NavigationComponent, canActivate: [UserGuard]
-  }
+    path: 'user', component: NavigationComponent, canActivate: [UserGuard],
+    
+    children : [
+
+      {
+        path: '', component: DashboardComponent, canActivate: [UserGuard],
+        },
+      {
+        
+        path : 'entrainement', component: EntrainementComponent, canActivate: [UserGuard]
+      },
+      {
+        
+        path : 'agenda', component: AgendaComponent, canActivate: [UserGuard]
+      },
+ 
+
+    ]
+  },
+  
 ];
 
 @NgModule({

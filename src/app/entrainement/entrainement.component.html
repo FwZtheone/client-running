@@ -1,0 +1,71 @@
+<mat-card class="containerCard">
+    <mat-card-title class="title">	Niveau</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content class="content">{{this.userService.getNiveau()}}</mat-card-content>      
+</mat-card>
+
+<div class="mat-elevation-z8 container_table">
+  <table mat-table [dataSource]="dataSource" >
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="objectif">
+      <th mat-header-cell *matHeaderCellDef> objectif </th>
+      <td mat-cell *matCellDef="let element"> {{element.objectif}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+ 
+  
+    <ng-container matColumnDef="niveau">
+        <th mat-header-cell *matHeaderCellDef> niveau </th>
+        <td mat-cell *matCellDef="let element"> {{element.niveau}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="commentaire">
+        <th mat-header-cell *matHeaderCellDef> commentaire </th>
+        <td mat-cell *matCellDef="let element"> {{element.commentaire}} </td>
+      </ng-container>
+   
+
+            
+      <ng-container matColumnDef="rating"   >
+        <th mat-header-cell *matHeaderCellDef  > appreciation </th>
+        <td mat-cell *matCellDef="let element" > {{element.rating}} </td>
+     
+        
+      </ng-container>
+
+
+
+
+
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+          mat-row
+          (click)="openDialog(row)"
+          [class.demo-row-is-clicked]="clickedRows.has(row)"
+          *matRowDef="let row; columns: displayedColumns;"
+      ></tr>
+
+  </table>
+
+
+
+

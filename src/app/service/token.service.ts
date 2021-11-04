@@ -21,8 +21,8 @@ export class TokenService {
     return localStorage.clear();
   }
   
-  public getTokenDecoded(token:string){
-    return this.jwtHelperService.decodeToken(token)
+  public getTokenDecoded(){
+    return this.jwtHelperService.decodeToken(this.getToken())
   }
 
   public getTokenExpirationDate(token:string){
@@ -34,7 +34,7 @@ export class TokenService {
   }
 
   public getIdOfDecodedToken(){
-    return this.getTokenDecoded(this.getToken());
+    return this.getTokenDecoded();
   }
 
 

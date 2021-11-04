@@ -55,11 +55,15 @@
 
             <ng-template #lengthPassword>
               <mat-error >
-                Votre mot de passe azoit faire au minimum <strong>8 caractéres</strong>
+                Votre mot de passe doit faire au minimum <strong>8 caractéres</strong>
               </mat-error>
             </ng-template>
       
           </mat-form-field>
+
+
+
+          
 
 
           <mat-form-field appearance="legacy">
@@ -84,6 +88,35 @@
 
             <mat-error *ngIf="this.poids?.errors?.required">
               Il y a une erreur dans le champ poids 
+            </mat-error>
+
+            
+          </mat-form-field>
+
+
+
+          <mat-form-field appearance="legacy">
+            <mat-label>Choisi ton niveau</mat-label>
+            <mat-select formControlName="niveau">
+              <mat-option *ngFor="let item of niveau" [value]="item.value">
+                {{item.viewValue}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="this.getSexe?.errors?.required">
+              Le champ niveau est <strong>requis</strong>
+            </mat-error>
+          </mat-form-field>
+
+
+
+          <mat-form-field class="example-full-width" appearance="legacy">
+            <mat-label>Age</mat-label>
+            <input type="number" matInput  min="0" formControlName="age"
+                   placeholder="Ex. 75">
+            <mat-hint>Ex. 27 ans</mat-hint>
+
+            <mat-error *ngIf="this.poids?.errors?.required">
+              Il y a une erreur dans le champ age 
             </mat-error>
 
             

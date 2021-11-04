@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Vous êtes sur le point de choisir un entraînement.</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="container">
+       <div class="center">
+            <p class="mat-h2">Entrainement</p>
+            <p>{{data.dataKey.nom}}</p>
+       </div>
+       <div class="center">
+        <p class="mat-h2">Objectif</p>
+        <p>{{data.dataKey.objectif}}</p>
+
+    </div>
+    <div class="center">
+        <p class="mat-h2">Commentaire</p>
+        <p>{{data.dataKey.commentaire}}</p>
+    </div>
+    <div class="center">
+        <p class="mat-h2">appreciation</p>
+
+        
+        <bar-rating [(rate)]="data.dataKey.rating" [max]="4" [theme]="'stars'" [showText]="false"  [readOnly]="true"
+        [titles]="['Bad', 'Mediocre' , 'Good', 'Awesome']"></bar-rating>   
+    </div>
+
+  
+   </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close color="warn" >Annuler</button>
+  <button mat-raised-button raised [mat-dialog-close]="true" color="primary" cdkFocusInitial (click)="handleSubmit(id)">S'inscrire</button>
+</mat-dialog-actions>

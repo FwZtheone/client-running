@@ -1,3 +1,4 @@
+import { TokenService } from './service/token.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
@@ -25,14 +26,72 @@ export class UserService {
     isLogged: false,
     rule: '',
     activity_total: 0,
-    km_total : 0
-
+    km_total : 0,
+    niveau: 'débutant'
    }
 
    //getter 
 
-   getNom(){return this.user.nom}
-   getId(){return this.user.id}
+  //  getNom(){
+  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
+  //   return variable.nom
+  
+  // }
+  //  getId(){
+  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
+  //   return variable.id
+  //   }
+  //  getPrenom(){
+  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
+  //   return variable.prenom
+  //   }
+  //  getEmail(){
+  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
+  //   return variable.email
+  //   }
+  //  getSexe(){
+  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
+  //   return variable.sexe
+  //   }
+  //  getPassword(){
+  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
+  //   return variable.password
+  //   }
+  //  getPoids(){
+  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
+  //   return variable.poids
+  //   }
+  //  getIsLogged()
+  //  {
+  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
+  //   return variable.isLogged
+  //   }
+  //  getRule(){
+  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
+  //   return variable.rule
+  //   }
+  //  getActivityTotal(){
+  //    return this.user.activity_total
+  //   }
+  //  getKmTotal(){
+  //    return this.user.km_total
+  //   }
+  //  getAge(){
+  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
+  //   return variable.age
+  //   }
+
+
+
+   getNom(){
+     const nom = this.tokenService.getTokenDecoded()
+     console.log(nom);
+    return this.user.nom
+  
+  }
+   getId(){
+     return this.user.id
+    }
    getPrenom(){ return this.user.prenom}
    getEmail(){return this.user.email}
    getSexe(){ return this.user.sexe}
@@ -43,8 +102,7 @@ export class UserService {
    getActivityTotal(){return this.user.activity_total}
    getKmTotal(){return this.user.km_total}
    getAge(){return this.user.age}
-
-
+   getNiveau(){return this.user.niveau}
    //setter
    setNom(nom:string):void{
      this.user.nom = nom;
@@ -94,6 +152,9 @@ export class UserService {
     this.user.age = age;
   }
 
+  setNiveau(niveau:string):void{
+    this.user.niveau = niveau;
+  }
    
 
    
@@ -107,7 +168,7 @@ export class UserService {
  
 
   
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private tokenService: TokenService) {
 
 
 
@@ -135,6 +196,45 @@ export class UserService {
   }
 
 
+  //je récupère le token et je fais une requête pour récuperer les datas
+  initializeToken(){
+    try{
+      const {user}  = this.tokenService.getIdOfDecodedToken();
+  
+      this.getInformation(user).subscribe(data=>{
+        this.setId(data.response.id);
+        this.setNom(data.response.nom);
+        this.setEmail(data.response.email);
+        this.setPrenom(data.response.prenom);
+        this.setSexe(data.response.sexe);
+        this.setPassword(data.response.password);
+        this.setPoids(data.response.poids);
+        this.setIsLogged(true);
+        this.setRule(data.response.rule);
+        //ajouter le niveau , age ,activité totale et km total  (4)
+        this.setNiveau(data.response.niveau);
+        this.setAge(data.response.age);
+        this.setActivityTotal(data.response.activity_total);
+        this.setKmTotal(data.response.km_total);
+      })
+    }
+    catch(err:any){
+      console.log("err");
+    }
+  }
+  
+
+
+  
+  logout(){
+    this.http.post('http://localhost:8000/user/logout', {
+      email : this.getEmail()
+    }).subscribe(data => {
+      console.log(data)
+    }, err=>{
+      console.log(err)
+    })
+  }
 
 
 
