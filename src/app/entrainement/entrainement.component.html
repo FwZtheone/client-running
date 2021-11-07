@@ -60,7 +60,14 @@
         
       </ng-container>
 
-
+      <ng-container matColumnDef="ajouter"   >
+        <th mat-header-cell *matHeaderCellDef  > S'entraîner </th>
+        <td mat-cell *matCellDef="let element" >
+           <button mat-button color="success" (click)="handleAjouter(element)">S'entraîner</button>       
+        </td>
+     
+        
+      </ng-container>
 
 
 
@@ -68,7 +75,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr
           mat-row
-          (click)="openDialog(row)"
+         
           [class.demo-row-is-clicked]="clickedRows.has(row)"
           *matRowDef="let row; columns: displayedColumns;"
       ></tr>

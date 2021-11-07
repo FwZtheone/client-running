@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import {ChangeDetectorRef} from '@angular/core';
 import { Subscription } from 'rxjs';
+import AllEntrainement from '../interface/AllEntrainement';
 
 
 export interface TableauEntrainement {
@@ -19,7 +20,11 @@ export interface TableauEntrainement {
   rating:number;
 }
 
-
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 
 
@@ -38,7 +43,7 @@ export class EntrainementComponent  implements OnInit, OnDestroy  {
 
 
   test:number=1;
-  displayedColumns: string[] = ['id', 'nom', 'objectif',  'niveau', "commentaire", "rating"];
+  displayedColumns: string[] = ['id', 'nom', 'objectif',  'niveau', "commentaire", "rating","ajouter"];
 
 
 
@@ -65,15 +70,15 @@ export class EntrainementComponent  implements OnInit, OnDestroy  {
    // mon composant qui veut écouter 
  
 
-   private subscriptionName = new Subscription();
-   private subscriptionListEntrainement = new Subscription();
-   private subscriptionListEntrainementFinished = new Subscription();
+  //  private subscriptionName = new Subscription();
+  //  private subscriptionListEntrainement = new Subscription();
+  //  private subscriptionListEntrainementFinished = new Subscription();
  
    
   ngOnDestroy(){
-    this.subscriptionName.unsubscribe();
-    this.subscriptionListEntrainement.unsubscribe();
-    this.subscriptionListEntrainementFinished.unsubscribe();
+    // this.subscriptionName.unsubscribe();
+    // this.subscriptionListEntrainement.unsubscribe();
+    // this.subscriptionListEntrainementFinished.unsubscribe();
   }
 
 
@@ -81,54 +86,86 @@ export class EntrainementComponent  implements OnInit, OnDestroy  {
     public userService: UserService, 
     public entrainementService:EntrainementService,
     public dialog: MatDialog,
-
+    private _snackBar: MatSnackBar,
 
     ) {
-        this.entrainementService.getEntrainementAPI()
-        this.entrainementService.getEntrainementUserAPI(this.userService.getId());
-        this.entrainementService.getEntrainementUserFinishedAPI(this.userService.getId())
-        this.subscriptionName = this.entrainementService.entrainementSubject$.subscribe((data:any)=>{
-          this.dataSource = data.response
-        })
 
-        this.subscriptionListEntrainement = this.entrainementService.entrainementUserSubject$.subscribe(
-          (data:any)=>{
-            this.dataSourceUser = data.response.Entrainements
-          }
-        )
+       
 
-        this.subscriptionListEntrainementFinished = this.entrainementService.entrainementUserFinishedSubject$.subscribe(
-          (data:any) => {
-            this.dataSourceUserFini = data.response[0].Entrainements
-          }
-        )
+
+
+
+      // this.entrainementService.getEntrainementAPI()
+      //   this.entrainementService.getEntrainementUserAPI(this.userService.getId());
+        // this.entrainementService.getEntrainementUserFinishedAPI(this.userService.getId())
+        // this.subscriptionName = this.entrainementService.entrainementSubject$.subscribe((data)=>{
+         
+        //   this.dataSource = data
+        // })
+
+        // this.subscriptionListEntrainement = this.entrainementService.entrainementUserSubject$.subscribe(
+        //   (data:any)=>{
+        //     this.dataSourceUser = data.Entrainements
+        //   }
+        // )
+
+        // this.subscriptionListEntrainementFinished = this.entrainementService.entrainementUserFinishedSubject$.subscribe(
+        //   (data:any) => {
+        //     this.dataSourceUserFini = data.response[0].Entrainements
+        //   }
+        // )
 
        
       
    }
 
+   durationInSeconds = 5;
+   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
   ngOnInit(): void {
+    this.entrainementService.afficherTousEntrainement().subscribe(
+      data => {
+          this.dataSource = data.response
+      }
+    )
 
+    this.entrainementService.afficherTousEntrainementUser(this.userService.getId()).subscribe(
+      (data:any)=>{
+        
+        this.dataSourceUser = data.response.Entrainements
+      }
+    )
 
-    // this.entrainementService.getEntrainementAPI()
-    // forkJoin([this.entrainementService.getAllEntrainement(),this.entrainementService.getEntrainementByUser(this.userService.getId()),this.entrainementService.getEntrainementFinishedByUser(this.userService.getId())]).subscribe(
-    //   data => {
-    //     this.dataSource = data[0].response;
-    //     this.dataSourceUser = data[1].response.Entrainements;
-    //     this.dataSourceUserFini = data[2].response[0].Entrainements
-    //   },
-    //   err => {
-    //     console.log(err)
-    //   }
-    // )
     
   }
-  
+  openSnackBar(msg:string,type:string[]) {
+    this._snackBar.open(msg, void 0, {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      duration: 5 * 1000,
+      panelClass: type
+    });
+  }
 
+
+  handleAjouter(element:Entrainement){
     
+   
+    this.entrainementService.ajouterEntrainementUser(this.userService.getId(),element.id).subscribe(
+      data =>{
+        this.openSnackBar("Entraînement ajouté !", ["success-snackbar"])
+        this.ngOnInit()
+
+      },
+      err =>{
+        this.openSnackBar("Tu as déjà cet entraînement !", ["error-snackbar"])
+      }
+    )
+
+   
  
- 
-      
+  }
 
 
 
@@ -143,23 +180,21 @@ export class EntrainementComponent  implements OnInit, OnDestroy  {
   }
 
 
-
-
-
-    handleDelete(element:Entrainement){
-     this.entrainementService.deleteEntrainementUserById(this.userService.getId(), element.SportifEntrainement?.entrainement_id).subscribe(
-       (data) => {
-         console.log(data)
-         this.ngOnInit();
-         
-       }
-       ,
-       err => {
-         console.log(err);
-       }
-     )
-    }
-
+  
+  handleDelete(element:Entrainement){
+   
+    this.entrainementService.supprimerEntrainementUser(this.userService.getId(), element.id).subscribe(
+      (data) => {
+        console.log(data)
+        this.ngOnInit();
+        
+      }
+      ,
+      err => {
+        console.log(err);
+      }
+    )
+   }
 
 
   

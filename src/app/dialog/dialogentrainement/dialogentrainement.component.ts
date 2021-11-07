@@ -9,6 +9,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -17,6 +18,8 @@ import {
   styleUrls: ['./dialogentrainement.component.scss']
 })
 export class DialogentrainementComponent implements OnInit {
+
+  private dialogSubscription = new Subscription();
 
   durationInSeconds = 5;
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -32,6 +35,7 @@ export class DialogentrainementComponent implements OnInit {
          private entrainementService:EntrainementService,
          public userService:UserService,
          private _snackBar: MatSnackBar,
+
          
   
 ) {
@@ -54,18 +58,19 @@ export class DialogentrainementComponent implements OnInit {
   }
 
   handleSubmit(sportif_id:number,entrainement_id:number){
-    this.entrainementService.subscriptionEntrainement(sportif_id,entrainement_id).subscribe(
-      (data)=>{
+    
+    this.entrainementService.ajouterEntrainementUser(sportif_id,entrainement_id).subscribe(
+      data =>{
         this.openSnackBar("Entraînement ajouté !", ["success-snackbar"])
-        
+        this.ngOnInit()
 
-    },
-    (err)=>{
-      this.openSnackBar("Tu as déjà cet entraînement !", ["error-snackbar"])
-    }
-    
-    
+      },
+      err =>{
+        this.openSnackBar("Tu as déjà cet entraînement !", ["error-snackbar"])
+      }
     )
+
+   
  
   }
 

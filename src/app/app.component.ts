@@ -13,6 +13,7 @@ import { EntrainementService } from './service/entrainement.service';
 export class AppComponent implements OnInit {
   title = 'client-running';
  constructor(private tokenService:TokenService, private userService:UserService, private entrainementService:EntrainementService){
+   
  }
   ngOnInit(): void {
     
