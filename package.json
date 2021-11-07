@@ -25,7 +25,7 @@
     "@fullcalendar/daygrid": "^5.10.0",
     "@fullcalendar/interaction": "^5.10.0",
     "angular-calendar": "^0.28.28",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "chartjs-plugin-annotation": "^0.5.7",
     "date-fns": "^2.25.0",
     "install": "^0.13.0",

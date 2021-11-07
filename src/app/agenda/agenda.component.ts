@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/user.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class AgendaComponent implements OnInit {
 
   
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+   
   }
 
 }

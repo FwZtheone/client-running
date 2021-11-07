@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { TokenService } from './service/token.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -7,12 +8,13 @@ import { User } from './interface/User';
 
 
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+
+    variable = JSON.parse(`${localStorage.getItem('user')}`)
   
    user: User= {
     nom: "",
@@ -30,130 +32,124 @@ export class UserService {
     niveau: 'débutant'
    }
 
+   
+
    //getter 
 
-  //  getNom(){
-  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
-  //   return variable.nom
-  
-  // }
-  //  getId(){
-  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
-  //   return variable.id
-  //   }
-  //  getPrenom(){
-  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
-  //   return variable.prenom
-  //   }
-  //  getEmail(){
-  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
-  //   return variable.email
-  //   }
-  //  getSexe(){
-  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
-  //   return variable.sexe
-  //   }
-  //  getPassword(){
-  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
-  //   return variable.password
-  //   }
-  //  getPoids(){
-  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
-  //   return variable.poids
-  //   }
-  //  getIsLogged()
-  //  {
-  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
-  //   return variable.isLogged
-  //   }
-  //  getRule(){
-  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
-  //   return variable.rule
-  //   }
-  //  getActivityTotal(){
-  //    return this.user.activity_total
-  //   }
-  //  getKmTotal(){
-  //    return this.user.km_total
-  //   }
-  //  getAge(){
-  //   const variable = JSON.parse(`${localStorage.getItem('user')}`) ;
-  //   return variable.age
-  //   }
-
-
-
    getNom(){
-     const nom = this.tokenService.getTokenDecoded()
-     console.log(nom);
-    return this.user.nom
+    return this.variable.nom
   
   }
    getId(){
-     return this.user.id
+    return this.variable.id
     }
-   getPrenom(){ return this.user.prenom}
-   getEmail(){return this.user.email}
-   getSexe(){ return this.user.sexe}
-   getPassword(){return this.user.password}
-   getPoids(){return this.user.poids}
-   getIsLogged(){return this.user.isLogged}
-   getRule(){return this.user.rule}
-   getActivityTotal(){return this.user.activity_total}
-   getKmTotal(){return this.user.km_total}
-   getAge(){return this.user.age}
-   getNiveau(){return this.user.niveau}
+   getPrenom(){
+    return this.variable.prenom
+    }
+   getEmail(){
+    return this.variable.email
+    }
+   getSexe(){
+    return this.variable.sexe
+    }
+   getPassword(){
+    return this.variable.password
+    }
+   getPoids(){
+    return this.variable.poids
+    }
+   getIsLogged()
+   {
+    return this.variable.isLogged
+    }
+   getRule(){
+    return this.variable.rule
+    }
+   getActivityTotal(){
+     return this.variable.activity_total
+    }
+   getKmTotal(){
+     return this.variable.km_total
+    }
+   getAge(){
+    return this.variable.age
+    }
+
+    getNiveau(){
+      return this.variable.niveau
+    }
+
+
+
+  //  getNom(){
+  //   return this.user.nom
+  
+  // }
+  //  getId(){
+  //    return this.user.id
+  //   }
+  //  getPrenom(){ return this.user.prenom}
+  //  getEmail(){return this.user.email}
+  //  getSexe(){ return this.user.sexe}
+  //  getPassword(){return this.user.password}
+  //  getPoids(){return this.user.poids}
+  //  getIsLogged(){return this.user.isLogged}
+  //  getRule(){return this.user.rule}
+  //  getActivityTotal(){return this.user.activity_total}
+  //  getKmTotal(){return this.user.km_total}
+  //  getAge(){return this.user.age}
+  //  getNiveau(){return this.user.niveau}
    //setter
    setNom(nom:string):void{
-     this.user.nom = nom;
+     this.variable.nom = nom;
    }
 
    setId(id:number):void{
-    this.user.id = id;
+    this.variable.id = id;
   }
 
   setPrenom(prenom:string):void{
-    this.user.prenom = prenom;
+    this.variable.prenom = prenom;
   }
 
   setEmail(email:string):void{
-    this.user.email = email;
+    this.variable.email = email;
   }
 
   setSexe(sexe:boolean):void{
-    this.user.sexe = sexe;
+    this.variable.sexe = sexe;
   }
 
   setPassword(password:string):void{
-    this.user.password = password;
+    this.variable.password = password;
   }
 
   setPoids(poids:number):void{
-    this.user.poids = poids;
+    this.variable.poids = poids;
   }
 
   setIsLogged(logged:boolean):void{
-    this.user.isLogged = logged;
+    this.variable.isLogged = logged;
   }
 
   setRule(rule:string):void{
-    this.user.rule = rule;
+    this.variable.rule = rule;
   }
 
   setActivityTotal(nb:number):void{
-    this.user.activity_total = nb;
+    this.variable.activity_total = nb;
   }
 
   setKmTotal(nb:number):void{
-    this.user.km_total = nb;
+    this.variable.km_total = nb;
   }
 
   setAge(age:number):void{
-    this.user.age = age;
+    this.variable.age = age;
   }
 
   setNiveau(niveau:string):void{
-    this.user.niveau = niveau;
+    this.variable.niveau = niveau;
   }
    
 
@@ -182,7 +178,7 @@ export class UserService {
 
 
 
-  connexion(data:User){
+  connexion(data:User):Observable<RegisterResponse>{
     
     return this.http.post<RegisterResponse>('http://localhost:8000/user/login',
     data, {'headers': this.headers}
@@ -198,10 +194,13 @@ export class UserService {
 
   //je récupère le token et je fais une requête pour récuperer les datas
   initializeToken(){
-    try{
+
       const {user}  = this.tokenService.getIdOfDecodedToken();
-  
+
+
       this.getInformation(user).subscribe(data=>{
+        this.localStorageUser(JSON.stringify(data.response));
+        console.log(JSON.parse(JSON.stringify(data.response)))
         this.setId(data.response.id);
         this.setNom(data.response.nom);
         this.setEmail(data.response.email);
@@ -216,12 +215,16 @@ export class UserService {
         this.setAge(data.response.age);
         this.setActivityTotal(data.response.activity_total);
         this.setKmTotal(data.response.km_total);
+       
       })
-    }
-    catch(err:any){
-      console.log("err");
-    }
+
   }
+
+
+
+    localStorageUser(user:any){
+      localStorage.setItem('user', user)
+    }
   
 
 
@@ -230,7 +233,7 @@ export class UserService {
     this.http.post('http://localhost:8000/user/logout', {
       email : this.getEmail()
     }).subscribe(data => {
-      console.log(data)
+      localStorage.clear();
     }, err=>{
       console.log(err)
     })

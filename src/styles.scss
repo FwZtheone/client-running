@@ -41,3 +41,15 @@ h1 {
 .gray-simple {
   color: #9fa2b4 !important;
 }
+
+.error-snackbar {
+  background-color: rgb(185, 46, 46);
+  color: white;
+  font-weight: bold;
+}
+
+.success-snackbar {
+  background-color: rgb(52, 160, 52);
+  color: white;
+  font-weight: bold;
+}

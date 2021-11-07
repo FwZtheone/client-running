@@ -5,6 +5,12 @@ export interface Entrainement {
     nom:string;
     niveau:string;
     objectif:string;
-    
+    Entrainements?:[];
+    SportifEntrainement?:Sport;
+}
+
+interface Sport {
+
+    entrainement_id:number;
 }
 

@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
       console.error('erreur')
     }
     else{
-      this.AuthService.connexion(this.profileForm.value).subscribe((data)=>{
+      this.AuthService.connexion(this.profileForm.value).subscribe((data:any)=>{
         
         if(!data.success){
           
@@ -67,8 +67,8 @@ export class HomeComponent implements OnInit {
         }
         else{
           this.openSnackBar("Connexion réussie !")
-          
-          this.tokenService.saveToken(data.response.toString());
+          console.log(data.response[0].jwt.toString());
+          this.tokenService.saveToken(data.response[0].jwt.toString());
           this.userService.initializeToken();
           this.router.navigate(['user'])
           

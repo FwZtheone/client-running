@@ -69,11 +69,11 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // must go before pl
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
 import { DialogentrainementComponent } from './dialog/dialogentrainement/dialogentrainement.component';
+import {MatTreeModule} from '@angular/material/tree';
 
 
 
 import { BarRatingModule } from "ngx-bar-rating";
-
 
 
 
@@ -130,7 +130,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
     FullCalendarModule,
     MatDialogModule,
-    BarRatingModule
+    BarRatingModule,
+    MatTreeModule
     
     
   ],
@@ -138,7 +139,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi:true
-  }],
+  },
+  
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

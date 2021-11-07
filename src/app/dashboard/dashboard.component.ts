@@ -53,28 +53,6 @@ export class DashboardComponent {
     ) {
       
 
-      //ici se trouve toute ma logique lorsqu'on arrive sur le board
-      // const {user} = this.tokenService.getIdOfDecodedToken()
-      // this.userService.setId(user);
-      // this.userService.initializeLocalStorage();
-      // this.userService.initializeUserInformation();
-      //je récupère toutes les informations de mon user grace à cette méthode
-      // this.userService.getInformation(this.userService.getId()).subscribe(data=>{
-      //   //ici que je vais sauvegarder toutes mes données importantes
-        
-      //   this.userService.setNom(data.response.nom);
-      //   this.userService.setEmail(data.response.email);
-      //   this.userService.setPrenom(data.response.prenom);
-      //   this.userService.setSexe(data.response.sexe);
-      //   this.userService.setPassword(data.response.password);
-      //   this.userService.setPoids(data.response.poids);
-      //   this.userService.setIsLogged(true);
-      //   this.userService.setRule(data.response.rule);
-      //   //reste age kmtotal et activité total 
-        
-      // },
-      // err=>{
-      //   console.log(err)
-      // })
+
   }
 }
